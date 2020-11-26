@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@antv/g6": "^3.2.8",
     "antd": "^3.23.3",
     "d3": "4.13.0",
+    "d3-cloud": "^1.2.5",
+    "d3-scale-chromatic": "^2.0.0",
+    "d3.layout.cloud": "^1.2.0",
     "lodash": "^4.17.15",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

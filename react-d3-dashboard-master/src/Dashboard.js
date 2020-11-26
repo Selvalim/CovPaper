@@ -53,31 +53,30 @@ export default class Dashboard extends Component {
                         </div>
                     </Header>
                 </Layout>
-                <Layout style={{ height: 720 }}>
-                    <Sider width={300} style={{backgroundColor:'#eee'}}>
-                        <Content style={{ height: 400 }}>
+                <Layout style={{ height: 910 }}>
+                    <Sider width={400} style={{backgroundColor:'#eee'}}>
+                        <Content style={{ height: 450 }}>
                             <View1 />
                         </Content>
-                        <Content style={{ height: 400 }}>
-                            <View2 
-                            />
+                        <Content style={{ height: 450 }}>
+                            <View2 />
                         </Content>
                     </Sider>
                     <Layout>
-                        <Content style={{ height: 510 }}>
+                        <Content style={{ height: 450 }}>
                             <View3 />
                         </Content>
-                        <Layout style={{ height: 500 }}>
+                        <Layout style={{ height: 450 }}>
                             <Content>
                                 <View4 />
                             </Content>
                         </Layout>
                     </Layout>
-                    <Sider width={300} style={{backgroundColor:'#eee'}}>                         
-                        <Content style={{ height: 300 }}>                             
+                    <Sider width={400} style={{backgroundColor:'#eee'}}>                         
+                        <Content style={{ height: 400 }}>                             
                             <View5 />                         
                         </Content>                         
-                        <Content style={{ height: 400 }}>                             
+                        <Content style={{ height: 500 }}>                             
                             <View6                      />                         
                         </Content>                     
                     </Sider>
