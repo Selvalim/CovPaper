@@ -5,14 +5,21 @@
   "dependencies": {
     "@antv/g6": "^3.2.8",
     "antd": "^3.23.3",
+    "axios": "^0.21.0",
     "d3": "4.13.0",
     "d3-cloud": "^1.2.5",
     "d3-scale-chromatic": "^2.0.0",
     "d3.layout.cloud": "^1.2.0",
+    "http-proxy-middleware": "^1.0.6",
     "lodash": "^4.17.15",
+    "prop-types": "^15.7.2",
     "react": "^16.9.0",
+    "react-axios": "^2.0.3",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-infinite-scroller": "^1.2.4",
+    "react-scripts": "3.1.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

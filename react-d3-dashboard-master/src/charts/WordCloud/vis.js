@@ -1,26 +1,12 @@
 import * as d3 from 'd3';
 var cloud = require("d3-cloud")
 
-const data = [
-  {text:"互联网医疗", size:30},
-  {text:"基因检测", size:30},
-  {text:"医疗服务", size:26},
-  {text:"再生医学", size:30},
-  {text:"生物科技", size:26},
-  {text:"医药", size:34},
-  {text:"免疫治疗", size:16},
-  {text:"体外诊断", size:20},
-  {text:"医疗设备", size:30},
-  {text:"医疗影像", size:24},
-  {text:"脑科学", size:20},
-];
 
-
-
-const draw = (props) => {
+const draw = (props,data) => {
     d3.select('.vis-wordcloud > *').remove();
+    console.log(data)
     const width = props.width;
-    const height = props.height-20;
+    const height = props.height-30;
     var fill = d3.interpolateWarm;  //输出20种类别的颜色 ---颜色比例尺
     var layout = cloud()
         .size([width, height])  //size([x,y]) 词云显示的大小
@@ -28,7 +14,7 @@ const draw = (props) => {
         .padding(5)
         .rotate(function() { return ~~(Math.random() * 3) * 15; })
         .font("Impact")
-        .fontSize(function(d) { return (d.size)*1.5; })
+        .fontSize(function(d) { return (d.size)/10; })
         .on("end", drawWord);
     layout.start();
     function drawWord(words) {

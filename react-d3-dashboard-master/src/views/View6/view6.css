@@ -2,3 +2,9 @@
     height: 495px;
     /* background-color: blueviolet; */
 }
+
+.news-container {
+    height: 440px;
+    width:380px;
+    overflow-y: auto;
+}

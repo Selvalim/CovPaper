@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './view2.css';
-import PieChart from '../../charts/PieChart';
 import View2Chart from '../../charts/view2Chart';
 
 export default class View2 extends Component {
