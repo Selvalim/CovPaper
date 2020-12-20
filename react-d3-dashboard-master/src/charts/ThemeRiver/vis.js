@@ -34,32 +34,7 @@ const draw = (props,stackData) => {
                         'EAAEC9', 'DAA5DF', 'BF9AD5', 'A599FF', '9385FF', '5BA3D7', 
                         '5CD9FF','85E4FF','99FFDB','A0E3D8','7CB6B1' ,'A7C8BB' ,'B1D3D0'])
 
-    
-    
-                        // const stackData = [];
-    // for(var d in data){
-    //   let newObj = {
-    //     '106':0,'32':0,'73':0,'100':0,'40':0,'11':0,'27':0,'85':0,'53':0,'72':0,'170':0
-    // ,'93':0,'67':0,'159':0,'161':0,'14':0,'55':0,'38':0,'118':0
-    //   }
-    //   let obj = data[d].replace(/{/g,"{\"");
-    //   obj = obj.replace(/: /g,"\":\"");
-    //   obj = obj.replace(/, /g,"\",\"");
-    //   obj = obj.replace(/}/g,"\"}");
-    //   obj = JSON.parse(obj);
-    //   //将字符串转换为对象
-    //   for(let a in obj){
-    //     if(topics.indexOf(a.toString())>0){
-    //       newObj[a.toString()] = parseInt(obj[a.toString()])
-    //     }
-    //   }
-    //   stackData.push({
-    //     'date': d.slice(16,-2),
-    //     ...newObj
-    //   })
-    // }
-    //stackData = stackData.slice(parseInt(Time2Num(state.start)),parseInt(Time2Num(state.end)))
-    //svg
+
     const svg = d3.select('.vis-themeriver').append('svg').attr('width',width).attr('height',height)
                         .attr('viewBox',"0 0 "+(width)+" "+(height-10))
     
@@ -157,3 +132,6 @@ const draw = (props,stackData) => {
 
 
 export default draw;
+
+
+                             // const stackData = [];     // for(var d in data){     //   let newObj = {     //     '106':0,'32':0,'73':0,'100':0,'40':0,'11':0,'27':0,'85':0,'53':0,'72':0,'170':0     // ,'93':0,'67':0,'159':0,'161':0,'14':0,'55':0,'38':0,'118':0     //   }     //   let obj = data[d].replace(/{/g,"{\"");     //   obj = obj.replace(/: /g,"\":\"");     //   obj = obj.replace(/, /g,"\",\"");     //   obj = obj.replace(/}/g,"\"}");     //   obj = JSON.parse(obj);     //   //将字符串转换为对象     //   for(let a in obj){     //     if(topics.indexOf(a.toString())>0){     //       newObj[a.toString()] = parseInt(obj[a.toString()])     //     }     //   }     //   stackData.push({     //     'date': d.slice(16,-2),     //     ...newObj     //   })     // }     //stackData = stackData.slice(parseInt(Time2Num(state.start)),parseInt(Time2Num(state.end)))     //svg
