@@ -20,15 +20,14 @@ export default class View1Chart extends Component {
         const _this = this;         
         store.subscribe(()=>{    
             const {start,end,check_topic} = store.getState();                 
-            if(start!=this.state.start||end!=this.state.end||check_topic!=this.state.check_topic){
-                if(check_topic!=0)                     
+            if(start!==this.state.start||end!==this.state.end||check_topic!==this.state.check_topic){
+                if(check_topic!==0)                     
                 axios.post('/api/similarity/',{  
                     "topic":check_topic,                       
                     "start":start,                         
                     "end":end,                     
                 })                     
-                .then(res=>{                         
-                    console.log(res)                         
+                .then(res=>{                                             
                     draw(this.props,check_topic,res.data);                         
                     this.setState({                                     
                         start:start,                                     

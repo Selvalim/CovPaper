@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
-import G6 from "@antv/g6";
-import { Layout } from 'antd';
+
 
 const data = {
   nodes: [    
@@ -32,12 +31,6 @@ const draw = (props) => {
     d3.select('.vis-view2chart > *').remove();
     const width = props.width;
     const height = props.height;
-    const padding = {
-        left: 10,
-        right: 10,
-        top: 10,
-        bottom: 10,
-      };
 
       function ticked(){
         links
@@ -122,14 +115,14 @@ const draw = (props) => {
     //绘制节点
     gs.append("circle")
         .attr("r", 20)
-        .attr("fill", d=>d.isDep == true?'#295981':'#eee')
+        .attr("fill", d=>d.isDep === true?'#295981':'#eee')
     //文字
     gs.append("text")
         .attr("x", 0)
         .attr("y", 0)
         .attr("dy", '0.38em')
         .attr('text-anchor', 'middle')
-        .attr('fill', d=>d.isDep == true?'#fff':'#000')
+        .attr('fill', d=>d.isDep === true?'#fff':'#000')
         .text((d)=>{
             return d.name;
         })

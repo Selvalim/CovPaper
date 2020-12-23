@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import draw from './vis';
 import axios from 'axios';
 import store from "../../redux"
-import action from "../../redux/actions"
+
 
 export default class ThemeRiver extends Component {
 
@@ -27,7 +27,7 @@ export default class ThemeRiver extends Component {
                     })
                     .then(res=>{
                         console.log(res)
-                        draw(this.props,res.data);
+                        draw(this.props,res.data,start,end);
                         this.setState({
                                     start:start,
                                     end:end,

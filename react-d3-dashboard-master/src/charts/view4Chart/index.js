@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import draw from './vis';
+import draw1 from './vis1';
+import draw2 from './vis2';
 import axios from 'axios'; 
 import store from "../../redux"
 
@@ -17,31 +18,34 @@ export default class View4Chart extends Component {
 
 
     componentDidMount() {
-        // const _this = this;         
-        // store.subscribe(()=>{    
-        //     const {start,end,check_topic} = store.getState();                 
-        //     if(start!=this.state.start||end!=this.state.end||check_topic!=this.state.check_topic){
-        //         if(check_topic!=0)                     
-        //         axios.post('/api/similarity/',{  
-        //             "topic":check_topic,                       
-        //             "start":start,                         
-        //             "end":end,                     
-        //         })                     
-        //         .then(res=>{                         
-        //             console.log(res)                         
-        //             // draw(this.props,check_topic,);                         
-        //             this.setState({                                     
-        //                 start:start,                                     
-        //                 end:end,                                     
-        //                 check_topic:check_topic,                                 
-        //             })                     
-        //         })                     
-        //         .catch(function (error) {                                 
-        //             console.log(error);                             
-        //         });                 
-        //     }         
-        // }) 
-        draw(this.props)
+        const _this = this;         
+        store.subscribe(()=>{    
+            const {start,end} = store.getState();                 
+            if(start!=this.state.start||end!=this.state.end){
+                 
+                axios.post('/api/news_paper/',{                      
+                    "start":start,                         
+                    "end":end,                     
+                })                     
+                .then(res=>{                         
+                    console.log(res.data.length)
+                    console.log(res.data)
+                    if(res.data.length>15){
+                        draw1(this.props,res.data,start,end); 
+                    }else{
+                        draw2(this.props,res.data,start,end);
+                    }                         
+                                            
+                    this.setState({                                     
+                        start:start,                                     
+                        end:end,                                                                      
+                    })                     
+                })                     
+                .catch(function (error) {                                 
+                    console.log(error);                             
+                });                 
+            }         
+        }) 
     }
 
     componentDidUpdate(preProps) {

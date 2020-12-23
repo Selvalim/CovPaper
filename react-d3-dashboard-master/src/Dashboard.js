@@ -41,9 +41,7 @@ export default class Dashboard extends Component {
     }
 
     render() {
-        const {selectedUser, greaterThenAge, includedGender} = this.state;
-        const filteredData = data.filter(user=>includedGender.indexOf(user.gender)!==-1)
-                                 .filter(user=>user.age>greaterThenAge);
+
         return (
             <div>
                 <Layout >

@@ -39,7 +39,7 @@ export default class LineChart extends Component {
     
         store.subscribe(()=>{
             const {china_cases} = store.getState();
-            if(china_cases!=_this.state.china_cases){
+            if(china_cases!==_this.state.china_cases){
                 draw(_this.props,china_cases);
                 _this.setState({
                     china_cases:china_cases,

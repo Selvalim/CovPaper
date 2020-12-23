@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import store from "../../redux"
 import action from "../../redux/actions"
 
-const draw = (props,stackData) => {
+const draw = (props,stackData,start,end) => {
     const state = store.getState();
     d3.select('.vis-themeriver > *').remove();
     const width = props.width;
@@ -42,13 +42,11 @@ const draw = (props,stackData) => {
     const stack = d3.stack().keys(topics).offset(d3.stackOffsetWiggle);
     console.log(stackData)
     const series = stack(stackData);
-    console.log(series[0].length);
 
-    console.log(axisWidth)
       // 定义x轴比例尺
       const x = d3
         .scaleLinear()
-        .domain([0, series[0].length-1])
+        .domain([parseTime(start),parseTime(end)])
         .range([20, axisWidth-20]);
     
       // 定义y轴比例尺
@@ -62,7 +60,7 @@ const draw = (props,stackData) => {
       const area = d3   //生成闭合path填充
         .area()
         .x(function(d, i) {
-          return x(i);
+          return x(parseTime(d.data.date));
         })
         .y0(function(d) {
           return y(d[0]);
@@ -71,7 +69,6 @@ const draw = (props,stackData) => {
           return y(d[1]);
         })
         .curve(d3.curveBasis);
-        console.log(series)
       svg
         .selectAll('path')
         .data(series)
@@ -103,15 +100,7 @@ const draw = (props,stackData) => {
 
       svg.selectAll("path")
         .on("click",function(){
-          // let color = d3.select(this).attr("fill")
-          // let click = d3.select(this).attr('click')
           let topic = d3.select(this).attr("topic")
-          // if(click=='false'){ //高亮
-          //   d3.select(this).attr('click',true);
-          //   d3.select(this).attr("fill",function(){
-          //     return d3.color(color).brighter();
-          //   })
-          // }
           store.dispatch(action.modifyCheckTopic(parseInt(topic)))
         })
       

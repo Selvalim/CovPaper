@@ -1,6 +1,5 @@
 import * as d3 from 'd3';
-import G6 from "@antv/g6";
-import { Layout } from 'antd';
+
 
 
 
@@ -15,12 +14,7 @@ const draw = (props,topic,data) => {
         '5CD9FF','85E4FF','99FFDB','A0E3D8','7CB6B1' ,'A7C8BB' ,'B1D3D0']) 
     const width = props.width;
     const height = props.height;
-    const padding = {
-        left: 10,
-        right: 10,
-        top: 10,
-        bottom: 10,
-      };
+
 
       function ticked(){             
           links  
@@ -73,7 +67,6 @@ const draw = (props,topic,data) => {
                             .force("charge", d3.forceManyBody())
                             .force("center", d3.forceCenter());
 
-    console.log(data)
     
     //生成节点数据
     forceSimulation.nodes(data.nodes)

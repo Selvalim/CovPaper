@@ -1,5 +1,4 @@
 import * as d3 from 'd3';
-import _ from 'lodash';
 import store from "../../redux" 
 import action from "../../redux/actions"
 
@@ -61,8 +60,7 @@ const draw = (props,data) => {
                 return x(parseTime(d.dateid)) })
             .y(function (d) { return y2(d.confirmedincr) })
         )
-function end(event){
-}
+
 
 //刷选
 
@@ -71,7 +69,6 @@ function end(event){
                 .extent([[0,0],[width-40,height-18]])
                 .on('brush',()=>{
                     const selection = d3.event.selection;
-                    console.log(d3.select('.brush'))
                 })
                 .on('end',()=>{
                     const selection = d3.event.selection;
