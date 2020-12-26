@@ -18,7 +18,7 @@ export default class View4Chart extends Component {
 
 
     componentDidMount() {
-        const _this = this;         
+        const _this = this;     
         store.subscribe(()=>{    
             const {start,end} = store.getState();                 
             if(start!==_this.state.start||end!==_this.state.end){
@@ -27,7 +27,7 @@ export default class View4Chart extends Component {
                     "start":start,                         
                     "end":end,                     
                 })                     
-                .then(res=>{                         
+                .then(res=>{                       
                     if(res.data.length>15){
                         draw1(_this.props,res.data,start,end); 
                     }else{

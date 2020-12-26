@@ -3,6 +3,8 @@ import { List } from 'antd';
 import './view6.css';
 import store from "../../redux"
 import axios from "axios"
+import { color } from 'd3';
+import Item from 'antd/lib/list/Item';
 
 class View6 extends Component {
 
@@ -31,6 +33,7 @@ class View6 extends Component {
                 'pk':check_new,
             })
                 .then(res => {
+                    console.log('shishi',res.data)
                     this.setState({
                         data: res.data,
                         start,
@@ -48,7 +51,16 @@ class View6 extends Component {
     }
 
 
-    render() {
+
+    render() {    
+        function IFexist(exist) {
+            if(!exist){
+                console.log("jinlai",exist)
+                return 'rgba(255, 118, 117,0.1)'
+            }else{
+                return ''
+            }
+        }   
         return (
             <div id='view6' className='pane'>
                 <div className='header'>新闻视图</div>
@@ -59,6 +71,11 @@ class View6 extends Component {
                         renderItem={item => (
                             <List.Item key={item.time}>
                                 <List.Item.Meta
+                                    style={
+                                        {
+                                            backgroundColor:IFexist(item.exist),
+                                        }
+                                    }
                                     title={<a href="https://www.baidu.com/s?wd=%s">{item.title + " " + item.time}</a>}
                                     description={item.body}
                                 />
