@@ -22,7 +22,7 @@ const draw = (props,data,check_topic) => {
     const center = svg.append('circle')
         .attr('cx', width / 2)
         .attr('cy', height / 2)
-        .attr('r', 15)
+        .attr('r', 10)
         .attr('fill', function(){
             return '#'+ColorMap(check_topic)
         })
@@ -40,7 +40,7 @@ const draw = (props,data,check_topic) => {
             }),d3.max(data.others,(item,i)=>{
                 return item.count
             })])
-            .range([90,110])
+            .range([70,90])
     others.append('line')
         .attr('x1',0)
         .attr('y1',0)
@@ -64,7 +64,7 @@ const draw = (props,data,check_topic) => {
             return scale(d.count)*(-Math.sin(i*PI/total))
         })
         .attr('r', function(d,i){
-            return 7
+            return 5
         })         
         .attr('fill', function(){
             return "#"+ColorMap(check_topic)
@@ -80,7 +80,7 @@ const draw = (props,data,check_topic) => {
         .attr('fill',function(){
             return "gray"
         })
-        .attr('font-size',10)
+        .attr('font-size',9)
         .attr('id',function(d,i){
             return i
         })

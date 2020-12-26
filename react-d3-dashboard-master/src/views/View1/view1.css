@@ -1,10 +1,10 @@
 #view1 {
-    height: 445px;
+    height: 400px;
     /* background-color: blue; */
 }
 .paper_container {
-    height: 400px;
-    width:380px;
+    height: 350px;
+    width:310px;
     overflow-y: auto;
 }
 

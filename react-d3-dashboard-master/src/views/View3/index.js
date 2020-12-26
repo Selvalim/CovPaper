@@ -16,8 +16,8 @@ export default class View3 extends Component {
         return (
             <div id='view3' className='pane'>
                 <div className='header'>文献主题河流视图</div>
-                < ThemeRiver width = {980} height = {350} />
-                < LineChart height={50} width={980} />    
+                < ThemeRiver width = {890} height = {300} />
+                < LineChart height={50} width={890} />    
             </div>
         )
     }

@@ -7,37 +7,7 @@ import store from "../../redux"
 import action from "../../redux/actions"
 import axios from 'axios'; 
 
-const data = [{
-    title:'文章1',
-    topic:'131',
-    date:'2020-03-14',
-    author:"dhaow dhaosf sfsaf"
-},{
-    title:'文章2',
-    topic:'121',
-    date:'2020-03-14',
-    author:"dhaow dhaosf sfsaf"
-},{
-    title:'文章3',
-    topic:'97',
-    date:'2020-03-14',
-    author:"dhaow dhaosf sfsaf"
-},{
-    title:'文章4',
-    topic:'57',
-    date:'2020-03-14',
-    author:"dhaow dhaosf sfsaf"
-},{
-    title:'文章5',
-    topic:'31',
-    date:'2020-03-14',
-    author:"dhaow dhaosf sfsaf"
-},{
-    title:'文章6',
-    topic:'15',
-    date:'2020-03-14',
-    author:"dhaow dhaosf sfsaf"
-},]
+
 const topics = ['17','103','57','42','20','56','61','97','15','31','58'
 ,'37','13','59','30','173','19','11','121','131'];
 const ColorMap = d3.scaleOrdinal()
@@ -87,11 +57,11 @@ export default class View1 extends Component {
         function generateMenu(i,title,topic,date,author){
             let style = {
                 background:'#'+ ColorMap(topic),
-                height:'90px',
-                width:'370px',
-                lineHeight:'30px',
+                height:'60px',
+                width:'300px',
+                lineHeight:'20px',
                 textAlign:'center',
-                fontSize:'14px',
+                fontSize:'10px',
                 wordBreak:'break-all'
             }
             return (
@@ -99,7 +69,7 @@ export default class View1 extends Component {
                     key={i}
                     title={title}
                     style={{
-                        height:'90px',
+                        height:'60px',
                     }}
                     onClick={function(){
                         store.dispatch(action.modifyCheckTopic(topic))

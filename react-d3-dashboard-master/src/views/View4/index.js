@@ -7,7 +7,7 @@ export default class View4 extends Component {
         return (
             <div id='view4' className='pane' >
                 <div className='header'>新闻影响视图</div>
-                < View4Chart  width = {980} height = {400}/>
+                < View4Chart  width = {890} height = {350}/>
             </div>
         )
     }
