@@ -101,6 +101,7 @@ const draw2 = (props,data,start,end) => {
     }).on('click', function () {
         let Nid = d3.select(this).attr('id') 
         store.dispatch(action.modifyCheckNew(Nid))
+        store.dispatch(action.modifyCheckPaper(Nid))
     })
 
     function proportionChart(holder){

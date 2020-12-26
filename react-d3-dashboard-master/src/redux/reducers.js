@@ -37,6 +37,11 @@ const reducers = (preState=state, action) => {
                 ...preState,
                 check_author:action.check_author,
         }
+        case 'MODIFY_CHECK_PAPER':
+            return {
+                ...preState,
+                check_paper:action.check_paper,
+        }
         case 'ADD':
             return {
                 ...preState,

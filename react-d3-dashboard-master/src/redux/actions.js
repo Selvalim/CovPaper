@@ -31,6 +31,12 @@ const actions = {
             check_author,
         }
     },
+    modifyCheckPaper: function(check_paper){
+        return {
+            type: 'MODIFY_CHECK_PAPER',
+            check_paper,
+        }
+    },
 }
 
 export default actions;

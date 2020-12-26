@@ -23,7 +23,7 @@ export default class View1 extends Component {
     constructor(props){         
         super(props);         
         this.state = {                  
-            check_new:0,  
+            check_paper:'',  
             data:[]       
         }     
     }
@@ -31,16 +31,15 @@ export default class View1 extends Component {
     componentDidMount(){
         const _this = this;         
         store.subscribe(()=>{    
-            const {check_new} = store.getState();                 
-            if(check_new!==_this.state.check_new){
+            const {check_paper} = store.getState();                 
+            if(check_paper!==_this.state.check_paper){
                  
                 axios.post('/api/news2paper/',{                      
-                    "news_id":check_new                 
+                    "news_id":check_paper                 
                 })                     
                 .then(res=>{                         
-                                            
                     _this.setState({                                     
-                        check_new, 
+                        check_paper, 
                         data: res.data                                                             
                     })                     
                 })                     
