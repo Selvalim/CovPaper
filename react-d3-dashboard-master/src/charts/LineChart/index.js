@@ -18,25 +18,15 @@ export default class LineChart extends Component {
         const _this = this
         axios.get('/api/china_cases/')
             .then(function(response){
-                console.log(response.data);
                 store.dispatch(action.modifyChinaCases(response.data))
-                _this.setState({
-                    china_cases:response.data,
-                })
+                // _this.setState({
+                //     china_cases:response.data,
+                // })
             }).catch(function (error) {
                     console.log(error);
                 });
 
-                // axios.post('/api/news/',{
-                //     "start":'2020-01-19',
-                //     "end":'2020-07-09',
-                // })
-                // .then(function(response){
-                //     console.log(response.data);
-                // }).catch(function (error) {
-                //         console.log(error);
-                //     });
-    
+
         store.subscribe(()=>{
             const {china_cases} = store.getState();
             if(china_cases!==_this.state.china_cases){

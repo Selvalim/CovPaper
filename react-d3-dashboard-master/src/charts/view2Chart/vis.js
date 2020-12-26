@@ -1,135 +1,100 @@
 import * as d3 from 'd3';
 
 
-const data = {
-  nodes: [    
-    {name:"xxx", isDep: false},
-    {name:"xx", isDep: true},
-    {name:"xx", isDep: false},
-    {name:"xxxx", isDep: true},
-    {name:"x", isDep: true},
-    {name:"xxxx", isDep: false},
-    {name:"xxx", isDep: false},
-    {name:"xxx", isDep: true},
-    {name:"xx", isDep: false}
-],
-edges: [   
-    {source:0,target:4,value:1.3},
-    {source:4,target:5,value:1},
-    {source:4,target:6,value:1},
-    {source:4,target:7,value:1},
-    {source:1,target:6,value:2},
-    {source:2,target:5,value:0.9},
-    {source:3,target:7,value:1},
-    {source:5,target:6,value:1.6},
-    {source:6,target:7,value:0.7},
-    {source:6,target:8,value:2}
-]
-};
 
-const draw = (props) => {
+const draw = (props,data,check_topic) => {
     d3.select('.vis-view2chart > *').remove();
     const width = props.width;
     const height = props.height;
 
-      function ticked(){
-        links
-            .attr("x1", function(d){return d.source.x;})
-            .attr("y1", function(d){return d.source.y;})
-            .attr("x2", function(d){return d.target.x;})
-            .attr("y2", function(d){return d.target.y;});
-            
-        gs.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-    }
+    const topics = ['17','103','57','42','20','56','61','97','15','31','58'
+    ,'37','13','59','30','173','19','11','121','131'];
+    const ColorMap = d3.scaleOrdinal()
+                        .domain(topics)
+                        .range(['FDA049','EB8370','EA8F85','F5998E','F4AAA4','DCA7B2',
+                        'EAAEC9', 'DAA5DF', 'BF9AD5', 'A599FF', '9385FF', '5BA3D7', 
+                        '5CD9FF','85E4FF','99FFDB','A0E3D8','7CB6B1' ,'A7C8BB' ,'B1D3D0'])
 
-    function started(d){
-        if(!d3.event.active){
-            forceSimulation.alphaTarget(0.8).restart();//设置衰减系数，对节点位置移动过程的模拟，数值越高移动越快，数值范围[0，1]
-        }
-        d.fx = d.x;
-        d.fy = d.y;
-    }
-    function dragged(d){
-        d.fx = d3.event.x;
-        d.fy = d3.event.y;
-    }
-    function ended(d){
-        if(!d3.event.active){
-            forceSimulation.alphaTarget(0);
-        }
-        d.fx = null;
-        d.fy = null;
-    }
-    
-    var marge = {top:10, bottom:10, left:10, right:10}
-    var svg = d3.select(".vis-view2chart").append('svg')
-                .attr("width", width).attr("height", height)
-    var g = svg.append("g")
-                .attr("transform", "translate("+marge.top+","+marge.left+")");
+    const svg = d3.select('.vis-view2chart')
+                    .append('svg')
+                    .attr("width", width).attr("height", height)
 
-    ////初始化力学仿真器，通过布局函数格式化数据    
-    var forceSimulation = d3.forceSimulation()
-                            .force("link", d3.forceLink())
-                            .force("charge", d3.forceManyBody())
-                            .force("center", d3.forceCenter());
+    const center = svg.append('circle')
+        .attr('cx', width / 2)
+        .attr('cy', height / 2)
+        .attr('r', 15)
+        .attr('fill', function(){
+            return '#'+ColorMap(check_topic)
+        })
+    const others = svg.selectAll('g.others')
+        .data(data.others)
+        .enter()
+        .append('g')
+        .attr('classname', 'others')
+        .attr('transform','translate('+(width/2)+','+(height/2)+')')
+    let total = data.others.length
+    let PI = 2*Math.PI
+    let scale = d3.scaleLinear()
+            .domain([d3.min(data.others,(item,i)=>{
+                return item.count
+            }),d3.max(data.others,(item,i)=>{
+                return item.count
+            })])
+            .range([90,110])
+    others.append('line')
+        .attr('x1',0)
+        .attr('y1',0)
+        .attr('y2',function(d,i){
+            return scale(d.count)*(-Math.sin(i*PI/total))
+        })
+        .attr('x2',function(d,i){
+            return scale(d.count)*(-Math.cos(i*PI/total))
+        })
+        .attr('classname','line')
+        .attr('stroke',function(){
+            return "#"+ColorMap(check_topic)
+        })
+        .attr('stroke-width',1)
+
+    others.append('circle')
+        .attr('cx',function(d,i){
+            return scale(d.count)*(-Math.cos(i*PI/total))
+        })
+        .attr('cy',function(d,i){
+            return scale(d.count)*(-Math.sin(i*PI/total))
+        })
+        .attr('r', function(d,i){
+            return 7
+        })         
+        .attr('fill', function(){
+            return "#"+ColorMap(check_topic)
+        })
     
-    //生成节点数据
-    forceSimulation.nodes(data.nodes)
-                    .on("tick", ticked);//这个函数很重要，后面给出具体实现和说明
-    
-    //生成边数据
-  forceSimulation.force("link")
-                    .links(data.edges)
-                    .distance((d) => {//每一边的长度
-                        return d.value*80;
-                    })
-    //设置图形的中心位置	
-  forceSimulation.force("center")
-                    .x(width/2)
-                    .y(height/2);
-    
-    //绘制边
-  var links = g.append("g")
-                .selectAll("line")
-                .data(data.edges)
-                .enter()
-                .append("line")
-                .attr("stroke", '#bbb')
-                .attr("stroke-width", d => d.value);
-    //建立用来放在每个节点和对应文字的分组<g>
-    var gs = g.selectAll(".circleText")
-                .data(data.nodes)
-                .enter()
-                .append("g")
-                .attr("transform", (d,i) => {
-                    var cirX = d.x;
-                    var cirY = d.y;
-                    return "translate("+cirX+","+cirY+")";
-                })
-                .call(d3.drag()
-                    .on("start", started)
-                    .on("drag", dragged)
-                    .on("end", ended)
-                )
-            
-    //绘制节点
-    gs.append("circle")
-        .attr("r", 20)
-        .attr("fill", d=>d.isDep === true?'#295981':'#eee')
-    //文字
-    gs.append("text")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("dy", '0.38em')
-        .attr('text-anchor', 'middle')
-        .attr('fill', d=>d.isDep === true?'#fff':'#000')
-        .text((d)=>{
-            return d.name;
+    others.append('text')
+        .attr('x',function(d,i){
+            return 1.2*scale(d.count)*(-Math.cos(i*PI/total))
+        })
+        .attr('y',function(d,i){
+            return 1.2*scale(d.count)*(-Math.sin(i*PI/total))
+        })
+        .attr('fill',function(){
+            return "gray"
+        })
+        .attr('font-size',10)
+        .attr('id',function(d,i){
+            return i
+        })
+        .text(function(d){
+            return d.author2
+        })
+        .attr('transform-origin',function(d,i){
+            return 1.2*scale(d.count)*(-Math.cos(i*PI/total))+' '+1.2*scale(d.count)*(-Math.sin(i*PI/total))
+        })
+        .attr('transform',function(d,i){
+            return 'rotate('+ (parseInt(180+360*i/total)) +')'
         })
 
 
+}
 
-
-    }
-
-    export default draw;
+export default draw;

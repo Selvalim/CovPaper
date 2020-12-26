@@ -40,7 +40,6 @@ const draw = (props,stackData,start,end) => {
     
 
     const stack = d3.stack().keys(topics).offset(d3.stackOffsetWiggle);
-    console.log(stackData)
     const series = stack(stackData);
 
       // 定义x轴比例尺

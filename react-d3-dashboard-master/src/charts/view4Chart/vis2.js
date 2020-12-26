@@ -1,4 +1,6 @@
 import * as d3 from 'd3';
+import store from "../../redux"  
+import action from "../../redux/actions"
 
 
 
@@ -88,16 +90,18 @@ const draw2 = (props,data,start,end) => {
         })
     }       
 
-    rect.on('mouseover',function(){
+    rect.on('mouseover', function () {
         d3.select(this.parentNode).moveToFront1()
         d3.select(this.parentNode).moveToFront2()
         let translate = d3.select(this).attr('translate')
-        d3.select(this).attr('transform',translate+'scale(2)')
-    }).on('mouseout',function(){
+        d3.select(this).attr('transform', translate + 'scale(4)')
+    }).on('mouseout', function () {
         let translate = d3.select(this).attr('translate')
-        d3.select(this).attr('transform',translate+'scale(1)')
+        d3.select(this).attr('transform', translate + 'scale(1)')
+    }).on('click', function () {
+        let Nid = d3.select(this).attr('id') 
+        store.dispatch(action.modifyCheckNew(Nid))
     })
-                    
 
     function proportionChart(holder){
         let stack = d3.stack().keys(topics).offset(d3.stackOffsetNone);
@@ -135,12 +139,9 @@ const draw2 = (props,data,start,end) => {
         let lineHeight = 13
         // Add X axis --> it is a date format     
         let parseTime = d3.timeParse("%Y-%m-%d")       
-        let x1 = d3.scaleTime()         
-                .domain([parseTime('2020-01-19'),parseTime('2020-07-02')])         
-                .range([5, rectWidth/1.7]);     
-        let x2 = d3.scaleTime()         
-                .domain([parseTime('2020-01-19'),parseTime('2020-07-02')])         
-                .range([0, rectWidth]);  
+        let x = d3.scaleTime()         
+                .domain([parseTime('2019-12-19'),parseTime('2020-10-20')])         
+                .range([1, rectWidth-1]);     
         let y = d3.scaleLinear()
                 .domain([0,d3.max(data,function(d){
                     return d.count
@@ -161,7 +162,7 @@ const draw2 = (props,data,start,end) => {
                                 return y(d.count) 
                             })             
                             .x(function (d) { 
-                                return x1(parseTime(d.date)) 
+                                return x(parseTime(d.date)) 
                             })         
                 )
         holder.append('line')
@@ -169,11 +170,11 @@ const draw2 = (props,data,start,end) => {
                         return  "translate("+(-rectWidth/2)+","+(0)+")"                                              
                     })
                     .attr('x1',function(d){
-                        return x2(parseTime(d.date))
+                        return x(parseTime(d.date))
                     })
                     .attr('y1',(0.5))
                     .attr('x2',function(d){                         
-                        return x2(parseTime(d.date))                     
+                        return x(parseTime(d.date))                     
                     })
                     .attr('y2',(rectHeight))
                     .attr('stroke','red')

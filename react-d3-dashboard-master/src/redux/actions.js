@@ -7,7 +7,6 @@ const actions = {
         }
     },
     modifyTimeLine: function(start,end){
-        console.log(start+end)
         return {
             type: 'MODIFY_TIME_LINE',
             start,
@@ -15,10 +14,21 @@ const actions = {
         }
     },
     modifyCheckTopic: function(check_topic){
-        console.log(check_topic)
         return {
             type: 'MODIFY_CHECK_TOPIC',
             check_topic,
+        }
+    },
+    modifyCheckNew: function(check_new){
+        return {
+            type: 'MODIFY_CHECK_NEW',
+            check_new,
+        }
+    },
+    modifyCheckAuthor: function(check_author){
+        return {
+            type: 'MODIFY_CHECK_AUTHOR',
+            check_author,
         }
     },
 }

@@ -1,9 +1,10 @@
 import * as d3 from 'd3';
-
+import store from "../../redux" 
+import action from "../../redux/actions"
 
 
 const draw1 = (props,data,start,end) => {
-    console.log(data)
+    const state = store.getState();
     d3.select('.vis-view4chart > *').remove();
     const topics = ['17','103','57','42','20','56','61','97','15','31','58'
     ,'37','13','59','30','173','19','11','121','131'];
@@ -92,10 +93,13 @@ const draw1 = (props,data,start,end) => {
         d3.select(this.parentNode).moveToFront1()
         d3.select(this.parentNode).moveToFront2()
         let translate = d3.select(this).attr('translate')
-        d3.select(this).attr('transform',translate+'scale(2)')
+        d3.select(this).attr('transform',translate+'scale(4)')
     }).on('mouseout',function(){
         let translate = d3.select(this).attr('translate')
         d3.select(this).attr('transform',translate+'scale(1)')
+    }).on('click',function(){
+        let Nid = d3.select(this).attr('id') 
+        store.dispatch(action.modifyCheckNew(Nid))
     })
 
 
@@ -135,12 +139,9 @@ const draw1 = (props,data,start,end) => {
         let lineHeight = 13
         // Add X axis --> it is a date format     
         let parseTime = d3.timeParse("%Y-%m-%d")       
-        let x1 = d3.scaleTime()         
-                .domain([parseTime('2020-01-19'),parseTime('2020-07-02')])         
-                .range([1, rectHeight/1.8]);     
-        let x2 = d3.scaleTime()         
-                .domain([parseTime('2020-01-19'),parseTime('2020-07-02')])         
-                .range([1, rectHeight]);     
+        let x = d3.scaleTime()         
+                .domain([parseTime('2019-12-19'),parseTime('2020-11-03')])         
+                .range([1, rectHeight-1]);     
         let y = d3.scaleLinear()
                 .domain([0,d3.max(data,function(d){
                     return d.count
@@ -165,7 +166,7 @@ const draw1 = (props,data,start,end) => {
                                 return y(d.count) 
                             })             
                             .y(function (d) { 
-                                return x1(parseTime(d.date)) 
+                                return x(parseTime(d.date)) 
                             })         
                 )
 
@@ -173,11 +174,11 @@ const draw1 = (props,data,start,end) => {
         //红线
         holder.append('line')                     
             .attr('y1',function(d){                         
-                return x2(parseTime(d.date))                     
+                return x(parseTime(d.date))                     
             })                     
             .attr('x1',(-rectWidth/2))                     
             .attr('y2',function(d){                                                  
-                return x2(parseTime(d.date))                                          
+                return x(parseTime(d.date))                                          
             })                     
             .attr('x2',((-rectWidth/2)+rectWidth))                     
             .attr('stroke','red')                     

@@ -2,3 +2,16 @@
     height: 445px;
     /* background-color: blue; */
 }
+.paper_container {
+    height: 400px;
+    width:380px;
+    overflow-y: auto;
+}
+
+
+.ant-menu-item:hover {
+    color: white;
+}
+.ant-menu-item-selected {
+    color: white;
+}

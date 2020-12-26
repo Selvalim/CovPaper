@@ -20,13 +20,12 @@ export default class ThemeRiver extends Component {
         const _this = this
         store.subscribe(()=>{
             const {start,end,check_topic} = store.getState();
-                if(start!=this.state.start||end!=this.state.end||check_topic!=this.state.check_topic){
+                if(start!==this.state.start||end!==this.state.end||check_topic!==this.state.check_topic){
                     axios.post('/api/topic_flow/',{
                         "start":start,
                         "end":end,
                     })
                     .then(res=>{
-                        console.log(res)
                         draw(this.props,res.data,start,end);
                         this.setState({
                                     start:start,

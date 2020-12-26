@@ -7,8 +7,9 @@ export default class View2 extends Component {
 
         return (
             <div id='view2' className='pane'>
-                <div className='header'>作者合作网络视图</div>
+                <div className='header'>作者合作关系视图</div>
                 < View2Chart  width = {390} height = {400}/>
+
             </div>
         )
     }

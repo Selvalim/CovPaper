@@ -27,6 +27,16 @@ const reducers = (preState=state, action) => {
                 ...preState,
                 check_topic:action.check_topic,
         }
+        case 'MODIFY_CHECK_NEW':
+            return {
+                ...preState,
+                check_new:action.check_new,
+        }
+        case 'MODIFY_CHECK_AUTHOR':
+            return {
+                ...preState,
+                check_author:action.check_author,
+        }
         case 'ADD':
             return {
                 ...preState,

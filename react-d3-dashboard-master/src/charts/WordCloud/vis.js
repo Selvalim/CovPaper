@@ -3,7 +3,6 @@ var cloud = require("d3-cloud")
 
 
 const draw = (props,data,check_topic) => {
-    console.log("cloud",data)
     d3.select('.vis-wordcloud > *').remove();
     const topics = ['17','103','57','42','20','56','61','97','15','31','58'     
                     ,'37','13','59','30','173','19','11','121','131'];     

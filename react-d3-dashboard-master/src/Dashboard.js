@@ -60,7 +60,7 @@ export default class Dashboard extends Component {
                             <View2 />
                         </Content>
                     </Sider>
-                    <Layout>
+                    <Layout width={980}>
                         <Content style={{ height: 450 }}>
                             <View3 />
                         </Content>

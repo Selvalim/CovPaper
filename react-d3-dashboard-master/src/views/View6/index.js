@@ -10,6 +10,9 @@ class View6 extends Component {
         super(props);
         this.state = {
             data: [],
+            start:'',
+            end:'',
+            check_new:'',
         }
     }
 
@@ -19,22 +22,26 @@ class View6 extends Component {
 
 
         store.subscribe(() => {
-            const { start, end } = store.getState();
-            console.log(start)
-            console.log(end)
+            const { start, end ,check_new} = store.getState();
+            if(start!=this.state.start||end!=this.state.end||check_new!=this.state.check_new){
+
             axios.post('/api/news/', {
                 "start": start,
                 "end": end,
+                'pk':check_new,
             })
                 .then(res => {
-                    console.log(res)
                     this.setState({
-                        data: res.data
+                        data: res.data,
+                        start,
+                        end,
+                        check_new
                     })
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+            }
         })
 
 

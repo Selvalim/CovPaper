@@ -68,18 +68,17 @@ const draw = (props,data) => {
   var brush = d3.brushX()
                 .extent([[0,0],[width-40,height-18]])
                 .on('brush',()=>{
-                    const selection = d3.event.selection;
                 })
-                .on('end',()=>{
+                .on('end',function (){
                     const selection = d3.event.selection;
-                    console.log(selection);
                     store.dispatch(action.modifyTimeLine(fomatTime(x.invert(selection[0])),fomatTime(x.invert(selection[1]))));
+                    store.dispatch(action.modifyCheckNew(''))
                 });
 
 
 
    const brushG = svg.append('g')
-                    .attr('class','brush')
+                    .attr('className','brush')
                     .call(brush)
                     // .call(brush.move, x.range())
 

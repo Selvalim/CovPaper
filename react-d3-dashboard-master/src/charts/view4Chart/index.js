@@ -21,22 +21,20 @@ export default class View4Chart extends Component {
         const _this = this;         
         store.subscribe(()=>{    
             const {start,end} = store.getState();                 
-            if(start!=this.state.start||end!=this.state.end){
+            if(start!==_this.state.start||end!==_this.state.end){
                  
                 axios.post('/api/news_paper/',{                      
                     "start":start,                         
                     "end":end,                     
                 })                     
                 .then(res=>{                         
-                    console.log(res.data.length)
-                    console.log(res.data)
                     if(res.data.length>15){
-                        draw1(this.props,res.data,start,end); 
+                        draw1(_this.props,res.data,start,end); 
                     }else{
-                        draw2(this.props,res.data,start,end);
+                        draw2(_this.props,res.data,start,end);
                     }                         
                                             
-                    this.setState({                                     
+                    _this.setState({                                     
                         start:start,                                     
                         end:end,                                                                      
                     })                     
