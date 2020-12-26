@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import data from './data';
-import { Layout } from 'antd';
+import { Layout, Row,Col,Divider } from 'antd';
 import View1 from './views/View1';
 import View2 from './views/View2';
 import View3 from './views/View3';
@@ -8,6 +8,7 @@ import View4 from './views/View4';
 import View5 from './views/View5';
 import View6 from './views/View6';
 import './dashboard.css';
+import { rollups } from 'd3';
 
 const { Sider, Content, Footer ,Header} = Layout;
 
@@ -47,7 +48,7 @@ export default class Dashboard extends Component {
                 <Layout >
                     <Header style={{ height: 30 , padding:0}}>
                         <div style={{marginTop: -17, textAlign:"center", color:"white", height: 30}}>                             
-                        基于疫情学术网络的可视分析系统                       
+                        社会事件与科学文献相互作用的可视分析系统                       
                         </div>
                     </Header>
                 </Layout>
